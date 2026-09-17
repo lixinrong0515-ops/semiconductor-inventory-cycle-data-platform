@@ -1,0 +1,55 @@
+version: "3"
+
+services:
+
+  postgres:
+    image: postgres:13
+    env_file:
+      - .env
+    restart: always
+    volumes:
+      - postgres-db-volume:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "airflow"]
+      interval: 5s
+      retries: 5
+
+  scheduler:
+    build: .
+    user: "airflow"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    env_file:
+      - .env
+    command: scheduler
+    restart: unless-stopped
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./logs:/opt/airflow/logs
+      - ./plugins:/opt/airflow/plugins
+      - ./scripts:/opt/airflow/scripts
+      # 修改这里：将凭证挂载到 /opt/airflow/google_credentials.json
+      - ~/.google/credentials_semic/google_credentials.json:/opt/airflow/google_credentials.json:ro
+
+  webserver:
+    build: .
+    user: "airflow"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    env_file:
+      - .env
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./logs:/opt/airflow/logs
+      - ./plugins:/opt/airflow/plugins
+      - ./scripts:/opt/airflow/scripts
+      # 修改这里：将凭证挂载到 /opt/airflow/google_credentials.json
+      - ~/.google/credentials_semic/google_credentials.json:/opt/airflow/google_credentials.json:ro
+
+volumes:
+  postgres-db-volume:

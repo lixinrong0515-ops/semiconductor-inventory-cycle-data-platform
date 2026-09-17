@@ -1,0 +1,5 @@
+apache-airflow-providers-google
+pyarrow
+requests
+pandas
+apache-airflow-providers-dbt-cloud==3.9.0

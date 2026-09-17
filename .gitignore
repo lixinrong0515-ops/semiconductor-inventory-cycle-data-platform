@@ -1,0 +1,36 @@
+# Environment variables and secrets
+.env
+*.env
+airflow/.env
+
+# Terraform
+terraform/.terraform/
+terraform/*.tfstate
+terraform/*.tfstate.*
+terraform/.terraform.tfstate.lock.info
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Airflow
+airflow/logs/
+airflow/.pytest_cache/
+
+# Database backups
+*.tar.gz
+
+# macOS
+.DS_Store
+
+# dbt
+dbt/target/
+dbt/dbt_packages/
+dbt/logs/
+
+# Jupyter
+.ipynb_checkpoints/
+
+terraform/keys/
