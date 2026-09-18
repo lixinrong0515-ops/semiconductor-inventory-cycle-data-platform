@@ -1,0 +1,218 @@
+version: 2
+
+models:
+
+  # ============================================================
+  # Quarterly Semiconductor Market Fact Table
+  # ============================================================
+
+  - name: fct_smh_q
+    description: >
+      Quarterly semiconductor market fact table combining SMH ETF,
+      S&P 500, semiconductor new orders, semiconductor PPI, and
+      semiconductor inventory data. The grain of this table is one row
+      per quarter. The most recent quarter is excluded from the final output,
+      and rows without valid SMH QoQ or YoY returns are also excluded.
+
+    columns:
+
+      - name: date
+        description: "Last trading day of the quarter."
+        data_tests:
+          - not_null
+          - unique
+
+      - name: year
+        description: "Calendar year."
+        data_tests:
+          - not_null
+
+      - name: quarter
+        description: "Calendar quarter, from 1 to 4."
+        data_tests:
+          - not_null
+
+      - name: year_quarter
+        description: "Year and quarter in YYYY-QN format."
+        data_tests:
+          - not_null
+          - unique
+
+      - name: smh_value
+        description: "SMH adjusted closing price on the last trading day of the quarter."
+        data_tests:
+          - not_null
+
+      - name: smh_qoq
+        description: "Quarter-over-quarter percentage return of the SMH ETF."
+        data_tests:
+          - not_null
+
+      - name: smh_yoy
+        description: "Year-over-year percentage return of the SMH ETF."
+        data_tests:
+          - not_null
+
+      - name: sp500_value
+        description: "S&P 500 index value on the last trading day of the quarter."
+
+      - name: sp500_qoq
+        description: "Quarter-over-quarter percentage return of the S&P 500."
+
+      - name: sp500_yoy
+        description: "Year-over-year percentage return of the S&P 500."
+
+      - name: smh_vs_sp500_qoq
+        description: >
+          Difference between the SMH ETF QoQ return and the S&P 500 QoQ return,
+          representing SMH relative performance versus the broader market.
+
+      - name: smh_vs_sp500_yoy
+        description: >
+          Difference between the SMH ETF YoY return and the S&P 500 YoY return,
+          representing SMH relative performance versus the broader market.
+
+      - name: new_orders
+        description: >
+          Quarterly semiconductor new orders calculated as the sum of
+          monthly new order observations within the quarter.
+
+      - name: new_orders_qoq
+        description: "Quarter-over-quarter percentage change in semiconductor new orders."
+
+      - name: new_orders_yoy
+        description: "Year-over-year percentage change in semiconductor new orders."
+
+      - name: semiconductor_ppi
+        description: >
+          Quarterly average semiconductor Producer Price Index calculated
+          from the monthly PPI observations within the quarter.
+
+      - name: ppi_qoq
+        description: "Quarter-over-quarter percentage change in semiconductor PPI."
+
+      - name: ppi_yoy
+        description: "Year-over-year percentage change in semiconductor PPI."
+
+      - name: quarterly_inventory
+        description: >
+          Semiconductor inventory value based on the last monthly observation
+          within the quarter.
+
+      - name: inventory_qoq
+        description: "Quarter-over-quarter percentage change in semiconductor inventory."
+
+      - name: inventory_yoy
+        description: "Year-over-year percentage change in semiconductor inventory."
+
+
+  # ============================================================
+  # Correlation Analysis
+  # ============================================================
+
+  - name: fct_smh_q_correlation
+    description: >
+      Quarterly correlation analysis between SMH relative performance
+      versus the S&P 500 and selected semiconductor cycle indicators
+      at one-year to five-year lags. The grain of this table is one row
+      per indicator.
+
+    columns:
+
+      - name: indicator
+        description: >
+          Semiconductor cycle indicator used in the correlation analysis.
+          Possible values are New Orders YoY, PPI YoY, and Inventory YoY.
+        data_tests:
+          - not_null
+          - unique
+
+      - name: lag_1_year
+        description: >
+          Pearson correlation between SMH relative YoY performance versus
+          the S&P 500 and the indicator value four quarters earlier.
+
+      - name: lag_2_year
+        description: >
+          Pearson correlation between SMH relative YoY performance versus
+          the S&P 500 and the indicator value eight quarters earlier.
+
+      - name: lag_3_year
+        description: >
+          Pearson correlation between SMH relative YoY performance versus
+          the S&P 500 and the indicator value twelve quarters earlier.
+
+      - name: lag_4_year
+        description: >
+          Pearson correlation between SMH relative YoY performance versus
+          the S&P 500 and the indicator value sixteen quarters earlier.
+
+      - name: lag_5_year
+        description: >
+          Pearson correlation between SMH relative YoY performance versus
+          the S&P 500 and the indicator value twenty quarters earlier.
+
+
+  # ============================================================
+  # Latest Quarter Key Metrics
+  # ============================================================
+
+  - name: fct_smh_q_key_metrics
+    description: >
+      Summary of the latest available quarter and the strongest lagged
+      relationships identified in the semiconductor cycle correlation analysis.
+      The grain of this table is one row representing the latest quarter.
+
+    columns:
+
+      - name: date
+        description: "Last trading day of the latest available quarter."
+        data_tests:
+          - not_null
+
+      - name: year
+        description: "Calendar year of the latest available quarter."
+        data_tests:
+          - not_null
+
+      - name: quarter
+        description: "Calendar quarter of the latest available quarter."
+        data_tests:
+          - not_null
+
+      - name: year_quarter
+        description: "Latest quarter in YYYY-QN format."
+        data_tests:
+          - not_null
+
+      - name: smh_return_yoy
+        description: >
+          Year-over-year percentage return of the SMH ETF
+          during the latest available quarter.
+
+      - name: smh_vs_sp500_yoy
+        description: >
+          Difference between the SMH YoY return and the S&P 500 YoY return
+          during the latest available quarter.
+
+      - name: top_reversal_driver
+        description: >
+          Indicator and lag period associated with the strongest absolute
+          correlation with SMH relative YoY performance.
+
+      - name: top_reversal_driver_corr
+        description: >
+          Correlation coefficient associated with the strongest absolute
+          lagged relationship.
+
+      - name: top_margin_driver
+        description: >
+          Indicator and lag period associated with the second-strongest
+          absolute correlation with SMH relative YoY performance.
+
+      - name: top_margin_driver_corr
+        description: >
+          Correlation coefficient associated with the second-strongest
+          lagged relationship.
+
+

@@ -1,0 +1,542 @@
+version: 2
+
+models:
+
+  # ==================================================
+  # SMH Monthly
+  # ==================================================
+
+  - name: int_smh_prices
+    description: "Monthly SMH ETF market data based on the last trading day of each month."
+
+    columns:
+
+      - name: date
+        description: "Last trading day of the month."
+        data_tests:
+          - not_null
+          - unique
+
+      - name: month
+        description: "Year and month in YYYY-MM format."
+        data_tests:
+          - not_null
+          - unique
+
+      - name: open
+        description: "Opening price on the last trading day of the month."
+        data_tests:
+          - not_null
+
+      - name: high
+        description: "Highest price on the last trading day of the month."
+        data_tests:
+          - not_null
+
+      - name: low
+        description: "Lowest price on the last trading day of the month."
+        data_tests:
+          - not_null
+
+      - name: close
+        description: "Closing price on the last trading day of the month."
+        data_tests:
+          - not_null
+
+      - name: adjusted_close
+        description: "Adjusted closing price on the last trading day of the month."
+        data_tests:
+          - not_null
+
+      - name: volume
+        description: "Trading volume on the last trading day of the month."
+        data_tests:
+          - not_null
+
+      - name: monthly_return
+        description: "Monthly percentage return calculated from the current and previous month's adjusted closing price."
+
+
+  # ==================================================
+  # S&P 500 Monthly
+  # ==================================================
+
+  - name: int_sp500_prices
+    description: "Monthly S&P 500 market data based on the last trading day of each month."
+
+    columns:
+
+      - name: date
+        description: "Last trading day of the month."
+        data_tests:
+          - not_null
+          - unique
+
+      - name: month
+        description: "Year and month in YYYY-MM format."
+        data_tests:
+          - not_null
+          - unique
+
+      - name: open
+        description: "Opening price on the last trading day of the month."
+        data_tests:
+          - not_null
+
+      - name: high
+        description: "Highest price on the last trading day of the month."
+        data_tests:
+          - not_null
+
+      - name: low
+        description: "Lowest price on the last trading day of the month."
+        data_tests:
+          - not_null
+
+      - name: close
+        description: "Closing price on the last trading day of the month."
+        data_tests:
+          - not_null
+
+      - name: adjusted_close
+        description: "Adjusted closing price on the last trading day of the month."
+        data_tests:
+          - not_null
+
+      - name: volume
+        description: "Trading volume on the last trading day of the month."
+        data_tests:
+          - not_null
+
+      - name: monthly_return
+        description: "Monthly percentage return calculated from the current and previous month's adjusted closing price."
+
+
+  # ==================================================
+  # Semiconductor Inventory Monthly
+  # ==================================================
+
+  - name: int_fred_inventories
+    description: "Monthly semiconductor inventory data with year-over-year and month-over-month growth."
+
+    columns:
+
+      - name: date
+        description: "Observation date of the inventory data."
+        data_tests:
+          - not_null
+          - unique
+
+      - name: month
+        description: "Year and month in YYYY-MM format."
+        data_tests:
+          - not_null
+          - unique
+
+      - name: inventory
+        description: "Monthly semiconductor inventory value."
+        data_tests:
+          - not_null
+
+      - name: inventory_yoy
+        description: "Year-over-year percentage change in semiconductor inventory."
+
+      - name: inventory_mom
+        description: "Month-over-month percentage change in semiconductor inventory."
+
+
+  # ==================================================
+  # New Orders Monthly
+  # ==================================================
+
+  - name: int_fred_new_orders
+    description: "Monthly semiconductor new orders data with year-over-year and month-over-month growth."
+
+    columns:
+
+      - name: date
+        description: "Observation date of the new orders data."
+        data_tests:
+          - not_null
+          - unique
+
+      - name: month
+        description: "Year and month in YYYY-MM format."
+        data_tests:
+          - not_null
+          - unique
+
+      - name: new_orders
+        description: "Monthly semiconductor new orders value."
+        data_tests:
+          - not_null
+
+      - name: new_orders_yoy
+        description: "Year-over-year percentage change in semiconductor new orders."
+
+      - name: new_orders_mom
+        description: "Month-over-month percentage change in semiconductor new orders."
+
+
+  # ==================================================
+  # Semiconductor PPI Monthly
+  # ==================================================
+
+  - name: int_fred_semiconductor_ppi
+    description: "Monthly semiconductor Producer Price Index data with year-over-year and month-over-month growth."
+
+    columns:
+
+      - name: date
+        description: "Observation date of the semiconductor PPI data."
+        data_tests:
+          - not_null
+          - unique
+
+      - name: month
+        description: "Year and month in YYYY-MM format."
+        data_tests:
+          - not_null
+          - unique
+
+      - name: semiconductor_ppi
+        description: "Monthly semiconductor Producer Price Index value."
+        data_tests:
+          - not_null
+
+      - name: ppi_yoy
+        description: "Year-over-year percentage change in semiconductor PPI."
+
+      - name: ppi_mom
+        description: "Month-over-month percentage change in semiconductor PPI."
+
+
+  # ==================================================
+  # SMH Yearly
+  # ==================================================
+
+  - name: int_smh_yearly
+    description: "Yearly SMH ETF data based on the last trading day of each year."
+
+    columns:
+
+      - name: year
+        description: "Calendar year."
+        data_tests:
+          - not_null
+          - unique
+
+      - name: date
+        description: "Last trading day of the year."
+        data_tests:
+          - not_null
+          - unique
+
+      - name: adjusted_close
+        description: "SMH adjusted closing price on the last trading day of the year."
+        data_tests:
+          - not_null
+
+      - name: yearly_return
+        description: "Annual percentage return calculated from the current and previous year's adjusted closing price."
+
+
+  # ==================================================
+  # S&P 500 Yearly
+  # ==================================================
+
+  - name: int_sp500_yearly
+    description: "Yearly S&P 500 data based on the last trading day of each year."
+
+    columns:
+
+      - name: year
+        description: "Calendar year."
+        data_tests:
+          - not_null
+          - unique
+
+      - name: date
+        description: "Last trading day of the year."
+        data_tests:
+          - not_null
+          - unique
+
+      - name: adjusted_close
+        description: "S&P 500 adjusted closing price on the last trading day of the year."
+        data_tests:
+          - not_null
+
+      - name: yearly_return
+        description: "Annual percentage return calculated from the current and previous year's adjusted closing price."
+
+
+  # ==================================================
+  # New Orders Yearly
+  # ==================================================
+
+  - name: int_fred_new_orders_yearly
+    description: "Yearly semiconductor new orders calculated as the sum of monthly new orders, with year-over-year growth."
+
+    columns:
+
+      - name: year
+        description: "Calendar year."
+        data_tests:
+          - not_null
+          - unique
+
+      - name: new_orders
+        description: "Annual semiconductor new orders calculated as the sum of the monthly observations within the year."
+        data_tests:
+          - not_null
+
+      - name: new_orders_yoy
+        description: "Year-over-year percentage change in annual semiconductor new orders."
+
+
+  # ==================================================
+  # Semiconductor PPI Yearly
+  # ==================================================
+
+  - name: int_fred_ppi_yearly
+    description: "Yearly semiconductor PPI calculated as the average of monthly PPI observations, with year-over-year growth."
+
+    columns:
+
+      - name: year
+        description: "Calendar year."
+        data_tests:
+          - not_null
+          - unique
+
+      - name: semiconductor_ppi
+        description: "Annual average semiconductor Producer Price Index."
+        data_tests:
+          - not_null
+
+      - name: ppi_yoy
+        description: "Year-over-year percentage change in annual average semiconductor PPI."
+
+
+  # ==================================================
+  # Semiconductor Inventory Yearly
+  # ==================================================
+
+  - name: int_fred_inventories_yearly
+    description: "Yearly semiconductor inventory data calculated from monthly inventory observations, with year-over-year growth."
+
+    columns:
+
+      - name: year
+        description: "Calendar year."
+        data_tests:
+        # - not_null
+          - unique
+
+      - name: inventories
+        description: "Annual semiconductor inventory value."
+        data_tests:
+         # - not_null
+
+      - name: inventories_yoy
+        description: "Year-over-year percentage change in annual semiconductor inventory."
+
+
+    # ==================================================
+  # SMH Quarterly
+  # ==================================================
+
+  - name: int_smh_q
+    description: "Quarterly SMH ETF market data based on the last trading day of each quarter, including quarter-over-quarter and year-over-year returns."
+
+    columns:
+
+      - name: date
+        description: "Last trading day of the quarter."
+        data_tests:
+          - not_null
+          - unique
+
+      - name: year
+        description: "Calendar year."
+        data_tests:
+          - not_null
+
+      - name: quarter
+        description: "Calendar quarter, from 1 to 4."
+        data_tests:
+          - not_null
+
+      - name: year_quarter
+        description: "Year and quarter in YYYY-QN format."
+        data_tests:
+          - not_null
+          - unique
+
+      - name: smh_value
+        description: "SMH adjusted closing price on the last trading day of the quarter."
+        data_tests:
+          - not_null
+
+      - name: smh_qoq
+        description: "Quarter-over-quarter percentage return calculated from the current and previous quarter's SMH adjusted closing price."
+
+      - name: smh_yoy
+        description: "Year-over-year percentage return calculated from the current quarter's SMH adjusted closing price and the adjusted closing price four quarters earlier."
+
+  # ==================================================
+  # S&P 500 Quarterly
+  # ==================================================
+
+  - name: int_sp500_q
+    description: "Quarterly S&P 500 market data based on the last trading day of each quarter, including quarter-over-quarter and year-over-year returns."
+
+    columns:
+
+      - name: date
+        description: "Last trading day of the quarter."
+        data_tests:
+          - not_null
+          - unique
+
+      - name: year
+        description: "Calendar year."
+        data_tests:
+          - not_null
+
+      - name: quarter
+        description: "Calendar quarter, from 1 to 4."
+        data_tests:
+          - not_null
+
+      - name: year_quarter
+        description: "Year and quarter in YYYY-QN format."
+        data_tests:
+          - not_null
+          - unique
+
+      - name: sp500_value
+        description: "S&P 500 adjusted closing value on the last trading day of the quarter."
+        data_tests:
+          - not_null
+
+      - name: sp500_qoq
+        description: "Quarter-over-quarter percentage return calculated from the current and previous quarter's S&P 500 adjusted closing value."
+
+      - name: sp500_yoy
+        description: "Year-over-year percentage return calculated from the current quarter's S&P 500 adjusted closing value and the adjusted closing value four quarters earlier."
+  
+  # ==================================================
+  # Semiconductor Inventory Quarterly
+  # ==================================================
+
+  - name: int_fred_inventories_q
+    description: "Quarterly semiconductor inventory data based on the last monthly observation of each quarter, including quarter-over-quarter and year-over-year growth."
+
+    columns:
+
+      - name: date
+        description: "Last monthly observation date within the quarter."
+        data_tests:
+          - not_null
+          - unique
+
+      - name: year
+        description: "Calendar year."
+        data_tests:
+          - not_null
+
+      - name: quarter
+        description: "Calendar quarter, from 1 to 4."
+        data_tests:
+          - not_null
+
+      - name: year_quarter
+        description: "Year and quarter in YYYY-QN format."
+        data_tests:
+          - not_null
+          - unique
+
+      - name: quarterly_inventory
+        description: "Semiconductor inventory value based on the last monthly observation of each quarter."
+        data_tests:
+          - not_null
+
+      - name: inventory_qoq
+        description: "Quarter-over-quarter percentage change in semiconductor inventory."
+
+      - name: inventory_yoy
+        description: "Year-over-year percentage change in semiconductor inventory."        
+  
+  # ==================================================
+  # New Orders Quarterly
+  # ==================================================
+
+  - name: int_fred_new_orders_q
+    description: "Quarterly semiconductor new orders calculated as the sum of monthly observations within each quarter, including quarter-over-quarter and year-over-year growth."
+
+    columns:
+
+      - name: year
+        description: "Calendar year."
+        data_tests:
+          - not_null
+
+      - name: quarter
+        description: "Calendar quarter, from 1 to 4."
+        data_tests:
+          - not_null
+
+      - name: year_quarter
+        description: "Year and quarter in YYYY-QN format."
+        data_tests:
+          - not_null
+          - unique
+
+      - name: new_orders
+        description: "Quarterly semiconductor new orders calculated as the sum of the three monthly observations within each quarter."
+        data_tests:
+          - not_null
+
+      - name: new_orders_qoq
+        description: "Quarter-over-quarter percentage change in quarterly semiconductor new orders."
+
+      - name: new_orders_yoy
+        description: "Year-over-year percentage change in quarterly semiconductor new orders."
+
+  # ==================================================
+  # Semiconductor PPI Quarterly
+  # ==================================================
+
+  - name: int_fred_ppi_q
+    description: "Quarterly semiconductor Producer Price Index calculated as the average of monthly PPI observations within each quarter, including quarter-over-quarter and year-over-year growth."
+
+    columns:
+
+      - name: year
+        description: "Calendar year."
+        data_tests:
+          - not_null
+
+      - name: quarter
+        description: "Calendar quarter, from 1 to 4."
+        data_tests:
+          - not_null
+
+      - name: year_quarter
+        description: "Year and quarter in YYYY-QN format."
+        data_tests:
+          - not_null
+          - unique
+
+      - name: semiconductor_ppi
+        description: "Quarterly average semiconductor Producer Price Index calculated from the monthly observations within each quarter."
+        data_tests:
+          - not_null
+
+      - name: ppi_qoq
+        description: "Quarter-over-quarter percentage change in quarterly average semiconductor PPI."
+
+      - name: ppi_yoy
+        description: "Year-over-year percentage change in quarterly average semiconductor PPI."

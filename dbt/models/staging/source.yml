@@ -1,0 +1,221 @@
+
+version: 2
+
+# ============================================================
+# Sources
+# ============================================================
+
+sources:
+
+  - name: semidata
+    database: semic-inventory-platform
+    schema: semiconductor_raw
+
+    tables:
+
+      - name: fred_inventories
+
+      - name: fred_new_orders
+
+      - name: fred_semiconductor_ppi
+
+      - name: smh_prices
+
+      - name: sp500_prices
+
+
+# ============================================================
+# Staging Models
+# ============================================================
+
+models:
+
+  # ============================================================
+  # SMH Prices
+  # ============================================================
+
+  - name: stg_smh_prices
+
+    description: "Staging model for SMH ETF daily market prices."
+
+    columns:
+
+      - name: date
+        description: "Trading date."
+        data_tests:
+          - not_null
+          - unique
+
+      - name: open
+        description: "Opening price."
+        data_tests:
+          - not_null
+
+      - name: high
+        description: "Highest price of the trading day."
+        data_tests:
+          - not_null
+
+      - name: low
+        description: "Lowest price of the trading day."
+        data_tests:
+          - not_null
+
+      - name: close
+        description: "Closing price."
+        data_tests:
+          - not_null
+
+      - name: adjusted_close
+        description: "Adjusted closing price."
+        data_tests:
+          - not_null
+
+      - name: volume
+        description: "Trading volume."
+        data_tests:
+          - not_null
+
+
+  # ============================================================
+  # S&P 500 Prices
+  # ============================================================
+
+  - name: stg_sp500_prices
+
+    description: "Staging model for S&P 500 daily market prices."
+
+    columns:
+
+      - name: date
+        description: "Trading date."
+        data_tests:
+          - not_null
+          - unique
+
+      - name: open
+        description: "Opening price."
+        data_tests:
+          - not_null
+
+      - name: high
+        description: "Highest price of the trading day."
+        data_tests:
+          - not_null
+
+      - name: low
+        description: "Lowest price of the trading day."
+        data_tests:
+          - not_null
+
+      - name: close
+        description: "Closing price."
+        data_tests:
+          - not_null
+
+      - name: adjusted_close
+        description: "Adjusted closing price."
+        data_tests:
+          - not_null
+
+      - name: volume
+        description: "Trading volume."
+        data_tests:
+          - not_null
+
+
+  # ============================================================
+  # FRED Inventories
+  # ============================================================
+
+  - name: stg_fred_inventories
+
+    description: "Staging model for FRED semiconductor inventories."
+
+    columns:
+
+      - name: realtime_start
+        description: "Data retrieval date."
+        data_tests:
+          - not_null
+
+      - name: realtime_end
+        description: "Data retrieval date."
+        data_tests:
+          - not_null
+
+      - name: date
+        description: "Observation date of the inventory data."
+        data_tests:
+          - not_null
+          - unique
+
+      - name: value
+        description: "FRED inventory observation value."
+        data_tests:
+          - not_null
+
+
+  # ============================================================
+  # FRED New Orders
+  # ============================================================
+
+  - name: stg_fred_new_orders
+
+    description: "Staging model for FRED semiconductor new orders."
+
+    columns:
+
+      - name: realtime_start
+        description: "Data retrieval date."
+        data_tests:
+          - not_null
+
+      - name: realtime_end
+        description: "Data retrieval date."
+        data_tests:
+          - not_null
+
+      - name: date
+        description: "Observation date of the new orders data."
+        data_tests:
+          - not_null
+          - unique
+
+      - name: value
+        description: "FRED new orders observation value."
+        data_tests:
+          - not_null
+
+
+  # ============================================================
+  # FRED Semiconductor PPI
+  # ============================================================
+
+  - name: stg_fred_semiconductor_ppi
+
+    description: "Staging model for semiconductor Producer Price Index (PPI)."
+
+    columns:
+
+      - name: realtime_start
+        description: "Data retrieval date."
+        data_tests:
+          - not_null
+
+      - name: realtime_end
+        description: "Data retrieval date."
+        data_tests:
+          - not_null
+
+      - name: date
+        description: "Observation date of the semiconductor PPI data."
+        data_tests:
+          - not_null
+          - unique
+
+      - name: value
+        description: "Semiconductor PPI observation value."
+        data_tests:
+          - not_null
+
