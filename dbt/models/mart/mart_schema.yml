@@ -157,7 +157,7 @@ models:
   # Latest Quarter Key Metrics
   # ============================================================
 
-  - name: fct_smh_q_key_metrics
+  - name: fct_key_kpi
     description: >
       Summary of the latest available quarter and the strongest lagged
       relationships identified in the semiconductor cycle correlation analysis.
