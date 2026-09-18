@@ -331,19 +331,16 @@ models:
       - name: year
         description: "Calendar year."
         data_tests:
-        # - not_null
           - unique
 
       - name: inventories
         description: "Annual semiconductor inventory value."
-        data_tests:
-         # - not_null
 
       - name: inventories_yoy
         description: "Year-over-year percentage change in annual semiconductor inventory."
 
 
-    # ==================================================
+  # ==================================================
   # SMH Quarterly
   # ==================================================
 
@@ -384,6 +381,7 @@ models:
 
       - name: smh_yoy
         description: "Year-over-year percentage return calculated from the current quarter's SMH adjusted closing price and the adjusted closing price four quarters earlier."
+
 
   # ==================================================
   # S&P 500 Quarterly
@@ -426,7 +424,8 @@ models:
 
       - name: sp500_yoy
         description: "Year-over-year percentage return calculated from the current quarter's S&P 500 adjusted closing value and the adjusted closing value four quarters earlier."
-  
+
+
   # ==================================================
   # Semiconductor Inventory Quarterly
   # ==================================================
@@ -467,8 +466,9 @@ models:
         description: "Quarter-over-quarter percentage change in semiconductor inventory."
 
       - name: inventory_yoy
-        description: "Year-over-year percentage change in semiconductor inventory."        
-  
+        description: "Year-over-year percentage change in semiconductor inventory."
+
+
   # ==================================================
   # New Orders Quarterly
   # ==================================================
@@ -504,6 +504,7 @@ models:
 
       - name: new_orders_yoy
         description: "Year-over-year percentage change in quarterly semiconductor new orders."
+
 
   # ==================================================
   # Semiconductor PPI Quarterly

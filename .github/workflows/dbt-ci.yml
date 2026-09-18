@@ -29,5 +29,21 @@ jobs:
       - name: Install dbt dependencies
         run: dbt deps
 
+      - name: Create dbt profile
+        run: |
+          mkdir -p ~/.dbt
+          cat > ~/.dbt/profiles.yml <<'EOF'
+          default:
+            target: ci
+            outputs:
+              ci:
+                type: bigquery
+                method: oauth
+                project: ci-placeholder
+                dataset: ci
+                threads: 1
+                location: EU
+          EOF
+
       - name: Parse dbt project
         run: dbt parse
