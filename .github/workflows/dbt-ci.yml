@@ -1,0 +1,33 @@
+name: dbt CI
+
+on:
+  pull_request:
+    paths:
+      - 'dbt/**'
+      - '.github/workflows/dbt-ci.yml'
+
+jobs:
+  dbt-parse:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: dbt
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dbt
+        run: pip install dbt-bigquery
+
+      - name: Install dbt dependencies
+        run: dbt deps
+
+      - name: Parse dbt project
+        run: dbt parse
