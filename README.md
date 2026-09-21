@@ -1,3 +1,6 @@
+## Architecture
+
+```mermaid
 flowchart TB
 
     %% =========================
@@ -14,11 +17,11 @@ flowchart TB
     %% =========================
     subgraph ORCHESTRATION["Orchestration"]
         AIRFLOW["Apache Airflow<br/>Docker"]
-        
+
         SMH_DAG["SMH Market Data DAG<br/>Daily 08:00"]
         SP_DAG["S&P 500 Market Data DAG<br/>Daily 08:00"]
         FRED_DAG["FRED Semiconductor DAG<br/>Monthly"]
-        
+
         AIRFLOW --> SMH_DAG
         AIRFLOW --> SP_DAG
         AIRFLOW --> FRED_DAG
@@ -52,7 +55,7 @@ flowchart TB
     GCS --> RAW_TABLES
 
     %% =========================
-    %% DBT
+    %% DBT TRANSFORMATION
     %% =========================
     subgraph DBT["dbt Cloud Production"]
         DBT_JOB["dbt Cloud<br/>Production Job"]
@@ -72,7 +75,7 @@ flowchart TB
     AIRFLOW -. "trigger production job" .-> DBT_JOB
 
     %% =========================
-    %% ANALYTICS
+    %% ANALYTICS & BI
     %% =========================
     subgraph ANALYTICS["Analytics & BI"]
         BIGQUERY_MART["BigQuery<br/>Analytics / Mart Layer"]
@@ -91,7 +94,7 @@ flowchart TB
         ACTIONS["GitHub Actions"]
         PARSE["dbt parse"]
         VALIDATION["CI Validation"]
-        
+
         GITHUB --> PR
         PR --> ACTIONS
         ACTIONS --> PARSE
@@ -105,7 +108,7 @@ flowchart TB
         SCHEDULE["Scheduled Airflow DAGs"]
         TRIGGER["DbtCloudRunJobOperator"]
         PROD["dbt Cloud Production Job"]
-        
+
         SCHEDULE --> TRIGGER
         TRIGGER --> PROD
     end
@@ -114,12 +117,12 @@ flowchart TB
     TRIGGER -. "trigger" .-> DBT_JOB
 
     %% =========================
-    %% INFRASTRUCTURE
+    %% INFRASTRUCTURE AS CODE
     %% =========================
     subgraph INFRA["Infrastructure as Code"]
         TERRAFORM["Terraform"]
         GCP["Google Cloud Infrastructure"]
-        
+
         TERRAFORM --> GCP
     end
 
