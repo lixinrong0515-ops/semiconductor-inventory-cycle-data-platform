@@ -1,6 +1,6 @@
 variable "credentials" {
   description = "My Credentials"
-  default     = "/Users/lixinrong/semic-terraform/keys/my-creds.json"
+  default     = "/Users/lixinrong/semic/terraform/keys/my-creds.json"
 }
 
 
