@@ -34,13 +34,3 @@ resource "google_bigquery_dataset" "raw" {
 }
 
 
-resource "google_bigquery_dataset" "staging" {
-  dataset_id = var.bq_staging_dataset_name
-  location   = var.location
-}
-
-
-resource "google_bigquery_dataset" "marts" {
-  dataset_id = var.bq_marts_dataset_name
-  location   = var.location
-}
