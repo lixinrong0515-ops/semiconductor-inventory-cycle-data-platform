@@ -273,7 +273,8 @@ The dashboard visualizes the historical relationship between semiconductor cycle
 
 ![Dashboard Preview](docs/dashboard.png)
 
-**[View the interactive dashboard →](YOUR_LOOKER_STUDIO_LINK)**
+
+**[View the interactive dashboard →](https://datastudio.google.com/s/k8lLbrTGuWY)**
 
 ## Key Analytical Findings
 
